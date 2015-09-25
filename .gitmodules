@@ -1,0 +1,3 @@
+[submodule "lrte"]
+	path = lrte
+	url = https://github.com/mzhaom/lrte.git

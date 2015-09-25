@@ -1,0 +1,28 @@
+sudo: true
+
+services:
+  - docker
+
+cache:
+  directories:
+  - $HOME/sources
+  - $HOME/output
+
+# language: cpp
+addons:
+  apt:
+    sources:
+      - ubuntu-toolchain-r-test
+    packages:
+      - wget
+
+before_install:
+  - TAR_DIR=$HOME/sources ./lrte/grte/download.sh
+  - docker pull ubuntu:14.04
+
+script:
+  # Just build lrte in this stage.
+  - ./release.py --docker_image=ubuntu:14.04 --no_build_crosstool --output=$HOME/output --upstream_source=$HOME/sources
+
+notifications:
+  email: false
